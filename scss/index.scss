@@ -1,2 +1,122 @@
 @import url('https://unpkg.com/reset-css@5.0.1/reset.css');
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+
+$white: #fafafa;
+$gray1: #f1f1f1;
+$gray2: #e1e1e1;
+$blue1: #648de5;
+$blue2: #446bc0;
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+h3,
+span,
+button {
+  font-family: 'Nunito', sans-serif;
+}
+
+button {
+  padding: 0.7rem 1rem;
+  background-color: $blue1;
+  font-size: 1.2rem;
+  color: $white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 200ms ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $blue2;
+  }
+}
+
+.game-container {
+  .trials {
+    background-color: $gray1;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column-reverse;
+    padding: 2rem;
+    gap: 2rem;
+
+    .try {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      > span {
+        font-size: 2rem;
+      }
+
+      .colors {
+        display: flex;
+        gap: 1rem;
+
+        .color {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          background-color: $gray2;
+        }
+      }
+    }
+  }
+
+  .entry {
+    background-color: $gray1;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 2rem;
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    > div {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+
+      .colors {
+        display: flex;
+        gap: 1.5rem;
+
+        .color {
+          width: 60px;
+          height: 60px;
+          border-radius: 50%;
+          background-color: $gray2;
+        }
+      }
+    }
+  }
+
+  .color-list {
+    background-color: $gray1;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-top: 2rem;
+
+    h3 {
+      font-size: 1.2rem;
+    }
+
+    .colors {
+      display: flex;
+      margin-top: 2rem;
+      justify-content: space-between;
+
+      .color {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: $gray2;
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
-import Mastermind from './Mastermind'
+import Mastermind from './lib/Mastermind'
 
 const mm = new Mastermind()
 mm.init()
+mm.loadDom()
 
 const { wellPlaced, wrongPlaced, won } = mm.try([
   'red',
@@ -9,5 +10,3 @@ const { wellPlaced, wrongPlaced, won } = mm.try([
   'orange',
   'green',
 ])
-
-console.log(wellPlaced, wrongPlaced, won)
