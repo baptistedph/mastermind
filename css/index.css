@@ -53,7 +53,7 @@ button:hover {
   }
 }
 .game-container .board {
-  grid-row: span 3;
+  grid-row: span 4;
   position: relative;
   height: 768px;
   overflow-y: auto;
@@ -62,31 +62,32 @@ button:hover {
   padding: 2rem;
   display: flex;
   align-items: flex-end;
+  overflow: hidden;
 }
-.game-container .board .game-over-content {
+.game-container .board .restart-content {
   display: none;
 }
-.game-container .board .game-over-content h3 {
+.game-container .board .restart-content h3 {
   font-size: 1.2rem;
   text-align: center;
 }
-.game-container .board .game-over-content .restart {
+.game-container .board .restart-content .restart-button {
   margin-top: 2rem;
 }
-.game-container .board .game-over-content .colors {
+.game-container .board .restart-content .colors {
   display: flex;
   gap: 1rem;
 }
-.game-container .board .game-over-content .colors .color {
+.game-container .board .restart-content .colors .color {
   width: 30px;
   height: 30px;
   border-radius: 50%;
   background-color: #e1e1e1;
 }
-.game-container .board.game-over .trials {
+.game-container .board.restart .trials {
   filter: blur(5px);
 }
-.game-container .board.game-over .game-over-content {
+.game-container .board.restart .restart-content {
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -135,68 +136,9 @@ button:hover {
   border-radius: 50%;
   background-color: #e1e1e1;
 }
-.game-container .entry {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #f1f1f1;
-  border-radius: 8px 8px 0 0;
-  padding: 2rem;
-  box-sizing: border-box;
-  box-shadow: 0 -0.3rem 0 #e1e1e1;
-}
-@media screen and (min-width: 768px) {
-  .game-container .entry {
-    position: relative;
-    border-radius: 8px;
-    box-shadow: none;
-  }
-}
-.game-container .entry h3 {
-  font-size: 1.2rem;
-}
-.game-container .entry > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-.game-container .entry > div .colors {
-  display: flex;
-  gap: 1.5rem;
-}
-.game-container .entry > div .colors .color {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: #e1e1e1;
-}
-.game-container .entry > div .colors .color.dragover {
-  border: solid 3px black;
-  box-sizing: border-box;
-}
-@media screen and (min-width: 1024px) {
-  .game-container .entry > div .colors .color {
-    width: 60px;
-    height: 60px;
-  }
-}
-.game-container .entry > div .colors + div {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  color: #aaaaaa;
-}
-.game-container .entry > div .colors + div [disabled] {
-  background-color: #9eb9f5;
-  cursor: not-allowed;
-}
 .game-container .color-list {
   position: fixed;
-  top: 2rem;
+  top: 1rem;
   right: 0;
   background-color: #f1f1f1;
   border-radius: 8px 0 0 8px;
@@ -277,6 +219,84 @@ button:hover {
 }
 .game-container .color-list .colors .color.dragging {
   cursor: grabbing;
+}
+.game-container .entry {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+  border-radius: 8px 8px 0 0;
+  padding: 2rem;
+  box-sizing: border-box;
+  box-shadow: 0 -0.3rem 0 #e1e1e1;
+}
+@media screen and (min-width: 768px) {
+  .game-container .entry {
+    position: relative;
+    border-radius: 8px;
+    box-shadow: none;
+  }
+}
+.game-container .entry .error.show {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #d57e7e;
+}
+.game-container .entry h3 {
+  font-size: 1.2rem;
+}
+.game-container .entry > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.game-container .entry > div .colors {
+  display: flex;
+  gap: 1.5rem;
+}
+.game-container .entry > div .colors .color {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e1e1e1;
+}
+.game-container .entry > div .colors .color.dragover {
+  border: solid 3px black;
+  box-sizing: border-box;
+}
+@media screen and (min-width: 1024px) {
+  .game-container .entry > div .colors .color {
+    width: 60px;
+    height: 60px;
+  }
+}
+.game-container .entry > div .colors + div {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: #aaaaaa;
+}
+.game-container .entry > div .colors + div [disabled] {
+  background-color: #9eb9f5;
+  cursor: not-allowed;
+}
+.game-container .utils {
+  display: none;
+}
+@media screen and (min-width: 768px) {
+  .game-container .utils {
+    display: block;
+  }
+}
+.game-container .utils .refresh-button {
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  width: 60px;
 }
 
 /*# sourceMappingURL=index.css.map */

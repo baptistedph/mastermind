@@ -11,22 +11,11 @@
     <noscript>You need JavaScript to run this site.</noscript>
     <div class="game-container">
       <div class="board">
-        <div class="game-over-content">
-          <h3>La combinaison à trouver était :</h3>
-          <ul class="colors"></ul>
-          <button class="restart">Relancer</button>
+        <div class="restart-content">
+          <h3></h3>
+          <button class="restart-button">Relancer</button>
         </div>
         <ul class="trials"></ul>
-      </div>
-      <div class="entry">
-        <h3>Entrez votre combinaison de couleurs.</h3>
-        <div>
-          <ul class="colors"></ul>
-          <div>
-            <button class="add-try">Valider</button>
-            <span class="remaining-trials"></span>
-          </div>
-        </div>
       </div>
       <div class="color-list">
         <div class="dots">
@@ -35,6 +24,22 @@
         <h3>Voici les couleurs disponibles.</h3>
         <h4>Glissez-déposez-les couleurs dans les cercles gris plus hauts.</h4>
         <ul class="colors"></ul>
+      </div>
+      <div class="entry">
+        <h3>Entrez votre combinaison de couleurs.</h3>
+        <div>
+          <ul class="colors"></ul>
+          <div>
+            <button class="add-try-button">Valider</button>
+            <span class="remaining-trials"></span>
+          </div>
+        </div>
+        <span class="error"></span>
+      </div>
+      <div class="utils">
+        <button class="refresh-button">
+          <img src="/assets/img/arrow-refresh.svg" alt="arrow refresh" />
+        </button>
       </div>
     </div>
 
