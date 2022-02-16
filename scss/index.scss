@@ -9,6 +9,8 @@ $blue1: #648de5;
 $blue2: #446bc0;
 $blue3: #151f2b;
 $blue4: #9eb9f5;
+$blue5: #111a24;
+$blue6: #0e141d;
 $green: #c6d57e;
 $red: #d57e7e;
 
@@ -19,11 +21,87 @@ $xl: 1280px;
 
 body {
   min-height: 100vh;
-  background: $blue3;
+  transition: background 200ms ease;
 
   @media screen and (min-width: $md) {
     display: grid;
     place-items: center;
+  }
+
+  &.dark {
+    background: $blue3;
+    .switch-theme-button .dark {
+      display: none;
+    }
+
+    .board,
+    .entry {
+      transition: background 200ms ease;
+      background: $blue5;
+    }
+
+    .color-list {
+      background: $blue5;
+      transition-property: background, transform;
+      transition: 200ms ease;
+      box-shadow: -0.3rem 0rem 0 $blue6;
+    }
+
+    .entry {
+      box-shadow: 0rem -0.3rem 0 $blue6;
+    }
+
+    .board.restart .restart-content {
+      transition: background 200ms ease;
+      background: $blue3;
+    }
+
+    .entry > div .colors .color {
+      transition: background 200ms ease;
+      background: $blue6;
+    }
+
+    h3,
+    span.id {
+      transition: color 200ms ease;
+      color: $white;
+    }
+
+    button {
+      transition-property: background-color, color;
+      transition: 200ms ease;
+      color: $white;
+    }
+
+    @media screen and (min-width: $md) {
+      .color-list,
+      .entry {
+        box-shadow: none;
+      }
+    }
+  }
+
+  &.light {
+    background: $white;
+
+    .switch-theme-button .light {
+      display: none;
+    }
+
+    .color-list {
+      box-shadow: -0.3rem 0rem 0 $gray2;
+    }
+
+    .entry {
+      box-shadow: 0rem -0.3rem 0 $gray2;
+    }
+
+    @media screen and (min-width: $md) {
+      .color-list,
+      .entry {
+        box-shadow: none;
+      }
+    }
   }
 }
 
@@ -42,7 +120,6 @@ button {
   color: $white;
   border: none;
   border-radius: 4px;
-  transition: background-color 200ms ease;
   cursor: pointer;
 
   &:hover {
@@ -123,7 +200,6 @@ button {
         border-radius: 8px;
         padding: 2rem;
         box-sizing: border-box;
-        box-sizing: border-box;
         gap: 1rem;
         background: $white;
         transform: translate(-50%, -50%);
@@ -186,12 +262,10 @@ button {
     padding: 2rem 3rem;
     transform: translate3d(calc(100% - 2rem), 0, 0);
     transition: transform 200ms ease;
-    box-shadow: -0.3rem 0rem 0 $gray2;
 
     @media screen and (min-width: $md) {
       position: relative;
       border-radius: 8px;
-      box-shadow: none;
       padding: 2rem;
       grid-column: 2;
       transform: translate3d(0, 0, 0);
@@ -255,6 +329,10 @@ button {
       font-size: 1rem;
       color: $gray3;
       margin-top: 0.3rem;
+
+      &:first-of-type {
+        margin-top: 1rem;
+      }
     }
 
     .colors {
@@ -300,12 +378,10 @@ button {
     border-radius: 8px 8px 0 0;
     padding: 2rem;
     box-sizing: border-box;
-    box-shadow: 0 -0.3rem 0 #e1e1e1;
 
     @media screen and (min-width: $md) {
       position: relative;
       border-radius: 8px;
-      box-shadow: none;
     }
 
     .error.show {
@@ -366,7 +442,9 @@ button {
     display: none;
 
     @media screen and (min-width: $md) {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
     }
 
     .refresh-button {
@@ -374,6 +452,15 @@ button {
       place-items: center;
       padding: 1rem;
       width: 60px;
+      height: 60px;
+    }
+
+    .switch-theme-button {
+      width: 60px;
+      height: 60px;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
     }
   }
 }

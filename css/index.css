@@ -2,12 +2,74 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap");
 body {
   min-height: 100vh;
-  background: #151f2b;
+  transition: background 200ms ease;
 }
 @media screen and (min-width: 768px) {
   body {
     display: grid;
     place-items: center;
+  }
+}
+body.dark {
+  background: #151f2b;
+}
+body.dark .switch-theme-button .dark {
+  display: none;
+}
+body.dark .board,
+body.dark .entry {
+  transition: background 200ms ease;
+  background: #111a24;
+}
+body.dark .color-list {
+  background: #111a24;
+  transition-property: background, transform;
+  transition: 200ms ease;
+  box-shadow: -0.3rem 0rem 0 #0e141d;
+}
+body.dark .entry {
+  box-shadow: 0rem -0.3rem 0 #0e141d;
+}
+body.dark .board.restart .restart-content {
+  transition: background 200ms ease;
+  background: #151f2b;
+}
+body.dark .entry > div .colors .color {
+  transition: background 200ms ease;
+  background: #0e141d;
+}
+body.dark h3,
+body.dark span.id {
+  transition: color 200ms ease;
+  color: #fafafa;
+}
+body.dark button {
+  transition-property: background-color, color;
+  transition: 200ms ease;
+  color: #fafafa;
+}
+@media screen and (min-width: 768px) {
+  body.dark .color-list,
+body.dark .entry {
+    box-shadow: none;
+  }
+}
+body.light {
+  background: #fafafa;
+}
+body.light .switch-theme-button .light {
+  display: none;
+}
+body.light .color-list {
+  box-shadow: -0.3rem 0rem 0 #e1e1e1;
+}
+body.light .entry {
+  box-shadow: 0rem -0.3rem 0 #e1e1e1;
+}
+@media screen and (min-width: 768px) {
+  body.light .color-list,
+body.light .entry {
+    box-shadow: none;
   }
 }
 
@@ -26,7 +88,6 @@ button {
   color: #fafafa;
   border: none;
   border-radius: 4px;
-  transition: background-color 200ms ease;
   cursor: pointer;
 }
 button:hover {
@@ -102,7 +163,6 @@ button:hover {
   border-radius: 8px;
   padding: 2rem;
   box-sizing: border-box;
-  box-sizing: border-box;
   gap: 1rem;
   background: #fafafa;
   transform: translate(-50%, -50%);
@@ -154,13 +214,11 @@ button:hover {
   padding: 2rem 3rem;
   transform: translate3d(calc(100% - 2rem), 0, 0);
   transition: transform 200ms ease;
-  box-shadow: -0.3rem 0rem 0 #e1e1e1;
 }
 @media screen and (min-width: 768px) {
   .game-container .color-list {
     position: relative;
     border-radius: 8px;
-    box-shadow: none;
     padding: 2rem;
     grid-column: 2;
     transform: translate3d(0, 0, 0);
@@ -219,6 +277,9 @@ button:hover {
   color: #aaaaaa;
   margin-top: 0.3rem;
 }
+.game-container .color-list h4:first-of-type {
+  margin-top: 1rem;
+}
 .game-container .color-list .colors {
   display: flex;
   margin-top: 2rem;
@@ -255,13 +316,11 @@ button:hover {
   border-radius: 8px 8px 0 0;
   padding: 2rem;
   box-sizing: border-box;
-  box-shadow: 0 -0.3rem 0 #e1e1e1;
 }
 @media screen and (min-width: 768px) {
   .game-container .entry {
     position: relative;
     border-radius: 8px;
-    box-shadow: none;
   }
 }
 .game-container .entry .error.show {
@@ -315,7 +374,9 @@ button:hover {
 }
 @media screen and (min-width: 768px) {
   .game-container .utils {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 }
 .game-container .utils .refresh-button {
@@ -323,6 +384,14 @@ button:hover {
   place-items: center;
   padding: 1rem;
   width: 60px;
+  height: 60px;
+}
+.game-container .utils .switch-theme-button {
+  width: 60px;
+  height: 60px;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
 }
 
 /*# sourceMappingURL=index.css.map */

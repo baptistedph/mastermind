@@ -7,12 +7,11 @@
     <link rel="stylesheet" href="/css/index.css" />
     <title>Mastermind</title>
   </head>
-  <body>
+  <body class="dark">
     <noscript>You need JavaScript to run this site.</noscript>
     <div class="game-container">
       <div class="board">
         <div class="restart-content">
-          <h3></h3>
           <button class="restart-button">Relancer</button>
         </div>
         <ul class="trials"></ul>
@@ -24,7 +23,7 @@
         <h3>Voici les couleurs disponibles.</h3>
         <h4>Glissez-déposez les couleurs dans les cercles gris plus bas.</h4>
         <h4>
-          Vous pouvez changer les couleurs à votre gise en cliquant dessus.
+          Vous pouvez changer les couleurs à votre guise en cliquant dessus.
         </h4>
         <h4>
           Mais attention, dès que vous changez une couleur, toute la combinaison
@@ -46,6 +45,10 @@
       <div class="utils">
         <button class="refresh-button">
           <img src="/assets/img/arrow-refresh.svg" alt="arrow refresh" />
+        </button>
+        <button class="switch-theme-button">
+          <img class="dark" src="/assets/img/moon.svg" alt="moon" />
+          <img class="light" src="/assets/img/sun.svg" alt="sun" />
         </button>
       </div>
     </div>
