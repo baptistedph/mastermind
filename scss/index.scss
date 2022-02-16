@@ -4,23 +4,39 @@
 $white: #fafafa;
 $gray1: #f1f1f1;
 $gray2: #e1e1e1;
+$gray3: #aaaaaa;
 $blue1: #648de5;
 $blue2: #446bc0;
+$blue3: #151f2b;
+$blue4: #9eb9f5;
+$green: #c6d57e;
+$red: #d57e7e;
+
+$sm: 576px;
+$md: 768px;
+$lg: 1024px;
+$xl: 1280px;
 
 body {
   min-height: 100vh;
-  display: grid;
-  place-items: center;
+  background: $blue3;
+
+  @media screen and (min-width: $md) {
+    display: grid;
+    place-items: center;
+  }
 }
 
 h3,
+h4,
 span,
 button {
   font-family: 'Nunito', sans-serif;
+  line-height: 1.5em;
 }
 
 button {
-  padding: 0.7rem 1rem;
+  padding: 0.6rem 1rem;
   background-color: $blue1;
   font-size: 1.2rem;
   color: $white;
@@ -35,21 +51,43 @@ button {
 }
 
 .game-container {
-  .trials {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+
+  @media screen and (min-width: $md) {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+
+  @media screen and (min-width: $lg) {
+    padding: 2rem;
+    max-width: 1024px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .board {
+    grid-row: span 3;
+    position: relative;
+    height: 768px;
+    overflow-y: auto;
     background-color: $gray1;
     border-radius: 8px;
-    display: flex;
-    flex-direction: column-reverse;
     padding: 2rem;
-    gap: 2rem;
+    display: flex;
+    align-items: flex-end;
 
-    .try {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .game-over-content {
+      display: none;
 
-      > span {
-        font-size: 2rem;
+      h3 {
+        font-size: 1.2rem;
+        text-align: center;
+      }
+
+      .restart {
+        margin-top: 2rem;
       }
 
       .colors {
@@ -64,13 +102,88 @@ button {
         }
       }
     }
+
+    &.game-over {
+      .trials {
+        filter: blur(5px);
+      }
+
+      .game-over-content {
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        padding: 2rem;
+        box-sizing: border-box;
+        gap: 1rem;
+        transform: translate(-50%, -50%);
+      }
+    }
+
+    .trials {
+      display: flex;
+      width: 100%;
+      flex-direction: column-reverse;
+      gap: 2rem;
+      filter: blur(0);
+      transition: filter 200ms ease;
+
+      .try {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        > span {
+          font-size: 2rem;
+
+          &.id {
+            width: 50px;
+          }
+
+          &.well-placed {
+            color: $green;
+          }
+
+          &.wrong-placed {
+            color: $red;
+          }
+        }
+
+        .colors {
+          display: flex;
+          gap: 1rem;
+
+          .color {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: $gray2;
+          }
+        }
+      }
+    }
   }
 
   .entry {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
     background-color: $gray1;
-    border-radius: 8px;
+    border-radius: 8px 8px 0 0;
     padding: 2rem;
-    margin-top: 2rem;
+    box-sizing: border-box;
+    box-shadow: 0 -0.3rem 0 #e1e1e1;
+
+    @media screen and (min-width: $md) {
+      position: relative;
+      border-radius: 8px;
+      box-shadow: none;
+    }
 
     h3 {
       font-size: 1.2rem;
@@ -79,6 +192,8 @@ button {
     > div {
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
       gap: 2rem;
       margin-top: 2rem;
 
@@ -87,23 +202,111 @@ button {
         gap: 1.5rem;
 
         .color {
-          width: 60px;
-          height: 60px;
+          width: 40px;
+          height: 40px;
           border-radius: 50%;
           background-color: $gray2;
+
+          &.dragover {
+            border: solid 3px black;
+            box-sizing: border-box;
+          }
+
+          @media screen and (min-width: $lg) {
+            width: 60px;
+            height: 60px;
+          }
+        }
+
+        + div {
+          display: flex;
+          gap: 1rem;
+          align-items: center;
+          color: $gray3;
+
+          [disabled] {
+            background-color: $blue4;
+            cursor: not-allowed;
+          }
         }
       }
     }
   }
 
   .color-list {
+    position: fixed;
+    top: 2rem;
+    right: 0;
     background-color: $gray1;
-    border-radius: 8px;
-    padding: 2rem;
-    margin-top: 2rem;
+    border-radius: 8px 0 0 8px;
+    padding: 2rem 3rem;
+    transform: translate3d(calc(100% - 2rem), 0, 0);
+    transition: transform 200ms ease;
+    box-shadow: -0.3rem 0rem 0 $gray2;
+
+    @media screen and (min-width: $md) {
+      position: relative;
+      border-radius: 8px;
+      box-shadow: none;
+      padding: 2rem;
+      grid-column: 2;
+      transform: translate3d(0, 0, 0);
+      top: 0;
+    }
+
+    .dots {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 2rem;
+
+      @media screen and (min-width: $md) {
+        display: none;
+      }
+
+      .dot {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0.5rem;
+        background: $gray2;
+        border-radius: 50%;
+
+        &::before,
+        &::after {
+          content: '';
+          position: absolute;
+          width: 6px;
+          height: 6px;
+          background: $gray2;
+          border-radius: 50%;
+        }
+
+        &::before {
+          margin-top: 0.8rem;
+        }
+
+        &::after {
+          margin-top: -0.8rem;
+        }
+      }
+    }
+
+    &.active {
+      transform: translate3d(1rem, 0, 0);
+    }
 
     h3 {
       font-size: 1.2rem;
+    }
+
+    h4 {
+      font-size: 1rem;
+      color: $gray3;
+      margin-top: 0.3rem;
     }
 
     .colors {
@@ -116,6 +319,11 @@ button {
         height: 30px;
         border-radius: 50%;
         background-color: $gray2;
+        cursor: grab;
+
+        &.dragging {
+          cursor: grabbing;
+        }
       }
     }
   }

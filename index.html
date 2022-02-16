@@ -4,22 +4,36 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="/css/index.css" />
     <title>Mastermind</title>
   </head>
   <body>
+    <noscript>You need JavaScript to run this site.</noscript>
     <div class="game-container">
-      <ul class="trials"></ul>
-
+      <div class="board">
+        <div class="game-over-content">
+          <h3>La combinaison à trouver était :</h3>
+          <ul class="colors"></ul>
+          <button class="restart">Relancer</button>
+        </div>
+        <ul class="trials"></ul>
+      </div>
       <div class="entry">
         <h3>Entrez votre combinaison de couleurs.</h3>
         <div>
           <ul class="colors"></ul>
-          <button class="add-try">Valider</button>
+          <div>
+            <button class="add-try">Valider</button>
+            <span class="remaining-trials"></span>
+          </div>
         </div>
       </div>
       <div class="color-list">
+        <div class="dots">
+          <div class="dot"></div>
+        </div>
         <h3>Voici les couleurs disponibles.</h3>
+        <h4>Glissez-déposez-les couleurs dans les cercles gris plus hauts.</h4>
         <ul class="colors"></ul>
       </div>
     </div>
