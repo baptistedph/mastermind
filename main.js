@@ -12,6 +12,7 @@ const handleTheme = () => {
     document.body.className = theme
   } else {
     window.localStorage.setItem('mastermind-theme', 'light')
+    document.body.className = 'light'
   }
 
   switchThemeButton.addEventListener('click', () => {
