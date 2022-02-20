@@ -7,23 +7,26 @@ $gray2: #e1e1e1;
 $gray3: #aaaaaa;
 $blue1: #648de5;
 $blue2: #446bc0;
-$blue3: #151f2b;
+$blue3: #17212f;
 $blue4: #9eb9f5;
-$blue5: #111a24;
-$blue6: #0e141d;
+$blue5: #121c27;
+$blue6: #090e13;
 $green: #c6d57e;
+$black: #141414;
 $red: #d57e7e;
 
-$sm: 576px;
-$md: 768px;
-$lg: 1024px;
-$xl: 1280px;
+$sm: 577px;
+$md: 769px;
+$lg: 1025px;
+$xl: 1281px;
 
 body {
-  min-height: 100vh;
-  transition: background 200ms ease;
+  transition: background-color 200ms ease;
+  height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
 
-  @media screen and (min-width: $md) {
+  @media screen and (min-width: $lg) {
     display: grid;
     place-items: center;
   }
@@ -36,29 +39,23 @@ body {
 
     .board,
     .entry {
-      transition: background 200ms ease;
-      background: $blue5;
+      background-color: $blue5;
     }
 
     .color-list {
-      background: $blue5;
-      transition-property: background, transform;
-      transition: 200ms ease;
-      box-shadow: -0.3rem 0rem 0 $blue6;
-    }
-
-    .entry {
-      box-shadow: 0rem -0.3rem 0 $blue6;
+      background-color: $blue5;
     }
 
     .board.restart .restart-content {
-      transition: background 200ms ease;
-      background: $blue3;
+      background-color: $blue3;
     }
 
     .entry > div .colors .color {
-      transition: background 200ms ease;
-      background: $blue6;
+      background-color: $blue6;
+
+      &.active {
+        border-color: $white;
+      }
     }
 
     h3,
@@ -72,35 +69,13 @@ body {
       transition: 200ms ease;
       color: $white;
     }
-
-    @media screen and (min-width: $md) {
-      .color-list,
-      .entry {
-        box-shadow: none;
-      }
-    }
   }
 
   &.light {
-    background: $white;
+    background-color: $white;
 
     .switch-theme-button .light {
       display: none;
-    }
-
-    .color-list {
-      box-shadow: -0.3rem 0rem 0 $gray2;
-    }
-
-    .entry {
-      box-shadow: 0rem -0.3rem 0 $gray2;
-    }
-
-    @media screen and (min-width: $md) {
-      .color-list,
-      .entry {
-        box-shadow: none;
-      }
     }
   }
 }
@@ -116,7 +91,7 @@ button {
 button {
   padding: 0.6rem 1rem;
   background-color: $blue1;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: $white;
   border: none;
   border-radius: 4px;
@@ -125,45 +100,64 @@ button {
   &:hover {
     background-color: $blue2;
   }
+
+  @media screen and (min-width: $md) {
+    font-size: 1.2rem;
+  }
 }
 
 .game-container {
   width: 100%;
   box-sizing: border-box;
-  padding: 1rem;
+  gap: 1.5rem;
+  max-width: 600px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
 
-  @media screen and (min-width: $md) {
+  @media screen and (min-width: $lg) {
+    height: auto;
+    max-width: 1024px;
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
 
-  @media screen and (min-width: $lg) {
-    padding: 2rem;
-    max-width: 1024px;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .board {
+    min-height: 200px;
+    max-height: 400px;
     grid-row: span 4;
+    flex: 1;
     position: relative;
-    height: calc(100vh - 400px);
     background-color: $gray1;
     border-radius: 8px;
-    padding: 2rem;
+    padding: 1.5rem;
     display: flex;
     align-items: flex-end;
+    transition: background-color 200ms ease;
 
     @media screen and (min-width: $md) {
-      height: 768px;
+      padding: 2rem;
+    }
+
+    @media screen and (min-width: $lg) {
+      max-height: auto;
+      min-height: 620px;
     }
 
     .restart-content {
       display: none;
+      transition: background-color 200ms ease;
 
       h3 {
-        font-size: 1.2rem;
+        font-size: 1rem;
         text-align: center;
+
+        @media screen and (min-width: $md) {
+          font-size: 1.2rem;
+        }
       }
 
       .restart-button {
@@ -210,9 +204,10 @@ button {
       display: flex;
       width: 100%;
       height: 100%;
+
       overflow-y: auto;
-      flex-direction: column-reverse;
-      gap: 2rem;
+      gap: 1rem;
+      flex-direction: column;
       filter: blur(0);
       transition: filter 200ms ease;
 
@@ -222,10 +217,18 @@ button {
         align-items: center;
 
         > span {
-          font-size: 2rem;
+          font-size: 1.3rem;
+
+          @media screen and (min-width: $sm) {
+            font-size: 2rem;
+          }
 
           &.id {
-            width: 50px;
+            width: 30px;
+
+            @media screen and (min-width: $sm) {
+              width: 50px;
+            }
           }
 
           &.well-placed {
@@ -242,10 +245,15 @@ button {
           gap: 1rem;
 
           .color {
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
             background-color: $gray2;
+
+            @media screen and (min-width: $sm) {
+              width: 30px;
+              height: 30px;
+            }
           }
         }
       }
@@ -253,76 +261,36 @@ button {
   }
 
   .color-list {
-    position: fixed;
-    z-index: 20;
-    top: 1rem;
-    right: 0;
     background-color: $gray1;
-    border-radius: 8px 0 0 8px;
-    padding: 2rem 3rem;
-    transform: translate3d(calc(100% - 2rem), 0, 0);
-    transition: transform 200ms ease;
+    border-radius: 8px;
+    padding: 1.5rem;
+    opacity: 0;
+    box-sizing: border-box;
+    height: max-content;
+    transition-property: background-color, margin-bottom, opacity;
+    transition: 200ms ease;
 
-    @media screen and (min-width: $md) {
+    @media screen and (min-width: $lg) {
+      display: flex;
+      flex-direction: column;
       position: relative;
       border-radius: 8px;
       padding: 2rem;
+      margin-bottom: 0;
       grid-column: 2;
-      transform: translate3d(0, 0, 0);
-      top: 0;
+      opacity: 1;
     }
 
-    .dots {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: 100%;
-      width: 2rem;
-
-      @media screen and (min-width: $md) {
-        display: none;
-      }
-
-      .dot {
-        position: absolute;
-        width: 6px;
-        height: 6px;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 0.5rem;
-        background: $gray2;
-        border-radius: 50%;
-
-        &::before,
-        &::after {
-          content: '';
-          position: absolute;
-          width: 6px;
-          height: 6px;
-          background: $gray2;
-          border-radius: 50%;
-        }
-
-        &::before {
-          margin-top: 0.8rem;
-        }
-
-        &::after {
-          margin-top: -0.8rem;
-        }
-      }
-    }
-
-    &.active {
-      transform: translate3d(1rem, 0, 0);
-
-      @media screen and (min-width: $md) {
-        transform: translate3d(0, 0, 0);
-      }
+    &.show {
+      opacity: 1;
     }
 
     h3 {
-      font-size: 1.2rem;
+      font-size: 1rem;
+
+      @media screen and (min-width: $md) {
+        font-size: 1.2rem;
+      }
     }
 
     h4 {
@@ -330,15 +298,31 @@ button {
       color: $gray3;
       margin-top: 0.3rem;
 
+      &.desktop {
+        display: none;
+      }
+
       &:first-of-type {
         margin-top: 1rem;
+      }
+
+      @media screen and (min-width: $lg) {
+        display: block;
+
+        &.mobile {
+          display: none;
+        }
       }
     }
 
     .colors {
       display: flex;
-      margin-top: 2rem;
+      margin-top: 1rem;
       justify-content: space-between;
+
+      @media screen and (min-width: $lg) {
+        margin-top: 2rem;
+      }
 
       .color {
         position: relative;
@@ -346,42 +330,33 @@ button {
         width: 30px;
         border-radius: 50%;
         overflow: hidden;
+        background-color: $gray2;
+        cursor: pointer;
 
-        &.dragging {
-          cursor: grabbing;
-        }
-
-        label {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background: red;
-          background-color: $gray2;
-
+        @media screen and (min-width: $lg) {
           cursor: grab;
         }
 
-        input {
-          display: none;
+        &.dragging {
+          cursor: grabbing;
         }
       }
     }
   }
 
   .entry {
-    position: fixed;
-    bottom: 0;
-    left: 0;
     z-index: 10;
     width: 100%;
     background-color: $gray1;
-    border-radius: 8px 8px 0 0;
-    padding: 2rem;
+    border-radius: 8px;
+    padding: 1.5rem;
     box-sizing: border-box;
+    transition-property: background-color, transform;
+    transition: 200ms ease;
+    height: max-content;
 
     @media screen and (min-width: $md) {
-      position: relative;
-      border-radius: 8px;
+      padding: 2rem;
     }
 
     .error.show {
@@ -391,7 +366,11 @@ button {
     }
 
     h3 {
-      font-size: 1.2rem;
+      font-size: 1rem;
+
+      @media screen and (min-width: $md) {
+        font-size: 1.2rem;
+      }
     }
 
     > div {
@@ -399,21 +378,40 @@ button {
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 2rem;
-      margin-top: 2rem;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      @media screen and (min-width: $md) {
+        gap: 2rem;
+        margin-top: 2rem;
+      }
 
       .colors {
         display: flex;
-        gap: 1.5rem;
+        justify-content: space-between;
+        width: 100%;
+        cursor: pointer;
+
+        @media screen and (min-width: $lg) {
+          cursor: auto;
+        }
 
         .color {
-          width: 40px;
-          height: 40px;
+          width: 45px;
+          height: 45px;
           border-radius: 50%;
           background-color: $gray2;
+          transition-property: background-color, border-color;
+          transition: 200ms ease;
+          border: solid 3px transparent;
+          box-sizing: border-box;
+
+          &.active {
+            border-color: $black;
+          }
 
           &.dragover {
-            border: solid 3px black;
+            border: solid 3px $black;
             box-sizing: border-box;
           }
 
@@ -428,6 +426,12 @@ button {
           gap: 1rem;
           align-items: center;
           color: $gray3;
+          justify-content: space-between;
+          width: 100%;
+
+          @media screen and (min-width: $lg) {
+            justify-content: flex-start;
+          }
 
           [disabled] {
             background-color: $blue4;
@@ -439,12 +443,22 @@ button {
   }
 
   .utils {
-    display: none;
+    display: flex;
+    gap: 1rem;
+    position: fixed;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+    flex-direction: column;
+    z-index: 10;
 
-    @media screen and (min-width: $md) {
-      display: flex;
-      align-items: center;
+    @media screen and (min-width: $lg) {
+      position: relative;
       gap: 2rem;
+      transform: none;
+      top: 0;
+      left: 0;
+      flex-direction: row;
     }
 
     .refresh-button {
