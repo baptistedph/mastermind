@@ -257,14 +257,17 @@ button:hover {
   color: #aaaaaa;
   margin-top: 0.3rem;
 }
-.game-container .color-list h4.desktop {
-  display: none;
-}
 .game-container .color-list h4:first-of-type {
   margin-top: 1rem;
 }
+.game-container .color-list h4.desktop {
+  display: none;
+}
 @media screen and (min-width: 1025px) {
   .game-container .color-list h4 {
+    display: block;
+  }
+  .game-container .color-list h4.desktop {
     display: block;
   }
   .game-container .color-list h4.mobile {

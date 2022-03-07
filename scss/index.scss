@@ -298,16 +298,20 @@ button {
       color: $gray3;
       margin-top: 0.3rem;
 
-      &.desktop {
-        display: none;
-      }
-
       &:first-of-type {
         margin-top: 1rem;
       }
 
+      &.desktop {
+        display: none;
+      }
+
       @media screen and (min-width: $lg) {
         display: block;
+
+        &.desktop {
+          display: block;
+        }
 
         &.mobile {
           display: none;
